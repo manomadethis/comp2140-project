@@ -1,6 +1,7 @@
 #Python Code
 
 import tkinter as tk
+import array
 
 #Creating the master window
 master_window = tk.Tk()
@@ -84,6 +85,11 @@ def record_management_system():
     phone_no_txt_box = tk.Entry(add_data_window)
     phone_no_txt_box.pack()
 
+    surgery_fee_lbl = tk.Label(add_data_window, text="Surgery Fee")
+    surgery_fee_lbl.pack()
+    surgery_fee_txt_box = tk.Entry(add_data_window)
+    surgery_fee_txt_box.pack()
+
     #Creating a submit button
     submit_btn = tk.Button(add_data_window, text="Submit", bg='#005A9C')
     submit_btn.pack()
@@ -98,12 +104,13 @@ def record_management_system():
       id_no = id_no_txt_box.get()
       address = address_txt_box.get()
       phone_no = phone_no_txt_box.get()
+      surgery_fee = surgery_fee_txt_box.get()
 
-      if name != "" and age != "" and id_no != "" and address != "" and phone_no != "":
-        records.append([name, age, id_no, address, phone_no])
+      if name != "" and age != "" and id_no != "" and address != "" and phone_no != "" and surgery_fee != "":
+        records.append([name, age, id_no, address, phone_no, surgery_fee])
 
         with open('records.txt', 'a+') as file:
-           file.write(name + ":" + age + ":" + id_no + ":" + address + ":" + phone_no + "\n")
+           file.write(name + ":" + age + ":" + id_no + ":" + address + ":" + phone_no + ":" + surgery_fee + "\n")
 
         response_lbl.configure(text="Record saved successfully!", fg='green')
         add_data_window.destroy()
@@ -114,8 +121,27 @@ def record_management_system():
     submit_btn.configure(command=save_data)
   
   #Binding the button to the add_dataFunction
-  add_record_btn.configure(command=add_data) 
+  add_record_btn.configure(command=add_data)
 
+  #Creating the donation calculation label, entry and button
+  donate_calc_lbl = tk.Label(record_window, text="Calculate Donation")
+  donate_calc_lbl.pack()
+  donate_calc_txt_box = tk.Entry(record_window)
+  donate_calc_txt_box.pack()
+  donate_calc_btn = tk.Button(record_window, text="Calculate", bg='#005A9C')
+  donate_calc_btn.pack()
+
+  def calc_don():
+    search_val = donate_calc_txt_box.get()
+
+    if int(search_val) >= 4000:
+      update_window = tk.Tk()
+      update_window.title('Donation Calculaation')
+
+      calc_don_lbl = tk.Label(update_window, text="Calculated Amount = " + str(int(search_val)*0.05))
+      calc_don_lbl.pack()
+
+  donate_calc_btn.configure(command=calc_don)
   #Creating the search record label, entry and button
   search_record_lbl = tk.Label(record_window, text='Search Record')
   search_record_lbl.pack()
@@ -126,6 +152,7 @@ def record_management_system():
 
   #Creating the function for searching records
   def search_data():
+    records = []
     #Opening the records file and appending it to the records list
     with open('records.txt','r') as file:
       for line in file:
@@ -133,16 +160,31 @@ def record_management_system():
 
     #Searching the records
     search_val = search_record_txt_box.get()
+    arr1 = []
+    arr2 = []
 
     for ele in records:
       if search_val in ele:
+
+        arr1.append(ele)
         #Opening a results window
-        results_window = tk.Tk()
-        results_window.title('Results Found')
+        #results_window = tk.Tk()
+        #results_window.title('Results Found')
 
         #Creating results label
-        result_lbl = tk.Label(results_window, text=ele)
-        result_lbl.pack()
+        #result_lbl = tk.Label(results_window, text=ele)
+        #result_lbl.pack()
+
+    #for line in arr1:
+      #arr2.append(line.split(':'))
+
+    print(arr1)
+    results_window = tk.Tk()
+    results_window.title('Results Found')
+
+    # Creating results label
+    result_lbl = tk.Label(results_window, text=arr1)
+    result_lbl.pack()
 
   #Binding the button to the search_data function
   search_record_btn.configure(command=search_data)
@@ -156,6 +198,7 @@ def record_management_system():
 
   #Creating the function for sorting records
   def sort_data():
+    records = []
     #Opening the records file and appending it to the records list
     with open('records.txt','r') as file:
       for line in file:
@@ -167,6 +210,7 @@ def record_management_system():
     #Opening a sort results window
     sort_results_window = tk.Tk()
     sort_results_window.title('Sorted Records')
+    print(records)
 
     for ele in records:
       result_lbl = tk.Label(sort_results_window, text=ele)
@@ -185,6 +229,7 @@ def record_management_system():
 
   #Creating the function for updating records
   def update_data():
+    records = []
     #Reading the records file
     with open('records.txt','r') as file:
       for line in file:
@@ -228,6 +273,11 @@ def record_management_system():
         phone_no_txt_box = tk.Entry(update_window)
         phone_no_txt_box.pack()
 
+        surgery_fee_lbl = tk.Label(update_window, text="Surgery Fee")
+        surgery_fee_lbl.pack()
+        surgery_fee_txt_box = tk.Entry(update_window)
+        surgery_fee_txt_box.pack()
+
         #Creating a save button
         save_btn = tk.Button(update_window, text="Save",bg='#005A9C')
         save_btn.pack()
@@ -241,16 +291,18 @@ def record_management_system():
           id_no = id_no_txt_box.get()
           address = address_txt_box.get()
           phone_no = phone_no_txt_box.get()
+          surgery_fee = surgery_fee_txt_box.get()
+          print(records)
 
-          if name != "" and age != "" and id_no != "" and address != "" and phone_no != "":
+          if name != "" and age != "" and id_no != "" and address != "" and phone_no != "" and surgery_fee != "":
             with open('records.txt','w') as file:
               for row in records:
                 if search_val not in row: 
                   file.write(row[0] + ":" + row[1] + ":" + row[2] + ":" +
-                    row[3] + ":" + row[4] + "\n")
+                    row[3] + ":" + row[4] + ":" + row[5] + "\n")
                 else:
                   file.write(name + ":" + age + ":" +
-                    id_no + ":" + address + ":" + phone_no + "\n")
+                    id_no + ":" + address + ":" + phone_no + ":" + surgery_fee + "\n")
 
             response_lbl.configure(text="Record updated successfully!", fg='green')
             update_window.destroy()
@@ -273,6 +325,7 @@ def record_management_system():
 
   #Creating the function for deleting records
   def delete_data():
+    records = []
     #Reading the records file
     with open('records.txt','r') as file:
       for line in file:
@@ -291,6 +344,7 @@ def record_management_system():
 
     #Creating the save data function
     def save_data():
+      records = []
       with open('records.txt','w') as file:
         for row in records:
           if search_val not in row: 
@@ -305,6 +359,31 @@ def record_management_system():
 
   #Binding the button to the delete_data function
   delete_record_btn.configure(command=delete_data)
+
+  donate_btn = tk.Button(record_window, text='Donate Fees', bg='#005A9C')
+  donate_btn.pack()
+
+  def donate_funds():
+    records = []
+    totaldon = 0.0
+    with open('records.txt','r') as file:
+      for line in file:
+        records.append(line.strip().split(':'))
+
+    donate_window = tk.Tk()
+    donate_window.title("Total Donations")
+
+    for amount in records:
+      if (int(amount[5]) >= 4000):
+        person_lbl = tk.Label(donate_window, text=str(amount) + str(int(amount[5]) * 0.05))
+        person_lbl.pack()
+        totaldon += int(amount[5]) * 0.05
+
+    amount_lbl = tk.Label(donate_window, text="Total Annual Funds = " + str(totaldon))
+    amount_lbl.pack()
+
+  donate_btn.configure(command=donate_funds)
+
 
 # Keeping the main window running
 master_window.mainloop()
