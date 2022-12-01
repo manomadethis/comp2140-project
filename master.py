@@ -42,7 +42,7 @@ response_lbl.pack()
 def record_management_system():
   record_window = tk.Tk()
   record_window.title('Records Management System')
-  record_window.configure(background='#FF9999')
+  record_window.configure(background='#ADD8E6')
 
   #Creating a container for records
   records = []
