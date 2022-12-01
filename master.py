@@ -6,14 +6,14 @@ import array
 #Creating the master window
 master_window = tk.Tk()
 master_window.title("User Login")
-master_window.configure(background='#FF9999')
+master_window.configure(background= '#ADD8E6')
 
 #Setting up the user input lables
-username_lbl = tk.Label(master_window, text='Username')
+username_lbl = tk.Label(master_window, text='Username', bg = '#ADD8E6')
 username_lbl.pack()
 username_txt_box = tk.Entry(master_window)
 username_txt_box.pack()
-password_lbl = tk.Label(master_window, text="Password")
+password_lbl = tk.Label(master_window, text="Password",bg = '#ADD8E6')
 password_lbl.pack()
 password_txt_box = tk.Entry(master_window, show='*')
 password_txt_box.pack()
@@ -30,12 +30,12 @@ def login():
     master_window.destroy()
     record_management_system()
   else:
-    response_lbl.configure(text='Invalid Username or Password. Try Again.',fg='red')
+    response_lbl.configure(text='Invalid Username or Password. Try Again.',fg='red',bg = '#ADD8E6')
 
 submit_btn = tk.Button(master_window, text='Login', command=login, bg='#005A9C')
 submit_btn.pack()
 
-response_lbl = tk.Label(master_window)
+response_lbl = tk.Label(master_window, bg = '#ADD8E6')
 response_lbl.pack()
 
 #Creating the record management system window
@@ -49,7 +49,7 @@ def record_management_system():
   
 
   #Creating the add record label and button
-  add_record_lbl = tk.Label(record_window, text="Add Record")
+  add_record_lbl = tk.Label(record_window, text="Add Record",bg = '#ADD8E6')
   add_record_lbl.pack()
   add_record_btn = tk.Button(record_window, text='Add Record', bg='#005A9C')
   add_record_btn.pack()
@@ -125,7 +125,7 @@ def record_management_system():
   add_record_btn.configure(command=add_data)
 
   #Creating the donation calculation label, entry and button
-  donate_calc_lbl = tk.Label(record_window, text="Calculate Donation")
+  donate_calc_lbl = tk.Label(record_window, text="Calculate Donation",bg = '#ADD8E6')
   donate_calc_lbl.pack()
   donate_calc_txt_box = tk.Entry(record_window)
   donate_calc_txt_box.pack()
@@ -144,7 +144,7 @@ def record_management_system():
 
   donate_calc_btn.configure(command=calc_don)
   #Creating the search record label, entry and button
-  search_record_lbl = tk.Label(record_window, text='Search Record')
+  search_record_lbl = tk.Label(record_window, text='Search Record',bg = '#ADD8E6')
   search_record_lbl.pack()
   search_record_txt_box = tk.Entry(record_window)
   search_record_txt_box.pack()
@@ -192,7 +192,7 @@ def record_management_system():
 
 
   #Creating the sort record label and button
-  sort_record_lbl = tk.Label(record_window, text="Sort Record")
+  sort_record_lbl = tk.Label(record_window, text="Sort Record",bg = '#ADD8E6')
   sort_record_lbl.pack()
   sort_record_btn = tk.Button(record_window, text="Sort Record", bg='#005A9C')
   sort_record_btn.pack()
@@ -221,7 +221,7 @@ def record_management_system():
   sort_record_btn.configure(command=sort_data) 
 
   #Creating the update record label, entry and button
-  update_record_lbl = tk.Label(record_window, text="Update Record")
+  update_record_lbl = tk.Label(record_window, text="Update Record", bg = '#ADD8E6')
   update_record_lbl.pack()
   update_record_txt_box = tk.Entry(record_window)
   update_record_txt_box.pack()
@@ -317,7 +317,7 @@ def record_management_system():
   update_record_btn.configure(command=update_data)
 
   #Creating the delete record label, entry and button
-  delete_record_lbl = tk.Label(record_window, text="Delete Record")
+  delete_record_lbl = tk.Label(record_window, text="Delete Record",bg = '#ADD8E6')
   delete_record_lbl.pack()
   delete_record_txt_box = tk.Entry(record_window)
   delete_record_txt_box.pack()
