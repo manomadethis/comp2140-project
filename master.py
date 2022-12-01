@@ -46,6 +46,7 @@ def record_management_system():
 
   #Creating a container for records
   records = []
+  
 
   #Creating the add record label and button
   add_record_lbl = tk.Label(record_window, text="Add Record")
