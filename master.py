@@ -225,15 +225,13 @@ def record_management_system():
                                        font=('Arial', 16))
 
                         self.e.grid(row=i, column=j)
-                        self.e.insert(END, records[i][j])
+                        self.e.insert(END, arr1[i][j])
 
         total_rows = len(arr1)
         total_columns = len(arr1[0])
 
         t = Table(results_window)
         # Creating results label
-        result_lbl = tk.Label(results_window, text=arr1)
-        result_lbl.pack()
 
     # Binding the button to the search_data function
     search_record_btn.configure(command=search_data)
@@ -442,10 +440,10 @@ def record_management_system():
         donate_window.geometry('1920x1080')
         donate_window.title("Total Donations")
 
-        arr1 = []
+        array1 = []
         for amount in records:
             if (int(amount[5]) >= 4000):
-                arr1.append(amount)
+                array1.append(amount)
                 totaldon += int(amount[5]) * 0.05
 
             class Table:
@@ -459,18 +457,19 @@ def record_management_system():
                                            font=('Arial', 16))
 
                             self.e.grid(row=i, column=j)
-                            self.e.insert(END, arr1[i][j])
+                            self.e.insert(END, array1[i][j])
 
-                d = Label(donate_window, text="Total Annual Funds = " + str(totaldon), font=font)
-                d.grid()
+                #print("Hello World")
+                #d = Label(donate_window, text="Total Annual Funds = " + str(totaldon), font=font)
+                #d.grid()
 
-            total_rows = len(arr1)
-            total_columns = len(arr1[0])
+            total_rows = len(array1)
+            total_columns = len(array1[0])
 
             t = Table(donate_window)
 
-            # amount_lbl = tk.Label(donate_window, text="Total Annual Funds = " + str(totaldon), font=font1)
-            # amount_lbl.pack()
+            amount_lbl = tk.Label(donate_window, text="Total Annual Funds = " + str(totaldon), font=font)
+            amount_lbl.grid()
             # t = Table(donate_window)
 
     donate_btn.configure(command=donate_funds)
